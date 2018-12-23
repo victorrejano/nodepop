@@ -74,9 +74,9 @@ router.post('/', async (req, res, next) => {
             // Devolver usuario guardado
             res.json({success: true, data: user});
 
-        } else {
-            res.json({success: false, error: 'Email, name and password are required'});
         }
+
+        res.json({success: false, error: 'Email, name and password are required'});
 
     } catch (err) {
         next(err);

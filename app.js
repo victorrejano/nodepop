@@ -4,7 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-// Importar conexión y modelos
+// Importar conexión
 require('./lib/connection');
 
 var app = express();
