@@ -8,6 +8,7 @@ require('dotenv').config();
 var app = require('../app');
 var debug = require('debug')('nodepop:server');
 var http = require('http');
+const cluster = require('cluster');
 
 /**
  * Get port from environment and store in Express.
@@ -16,19 +17,42 @@ var http = require('http');
 var port = normalizePort(process.env.PORT || '3000');
 app.set('port', port);
 
-/**
- * Create HTTP server.
- */
+// Modo clúster
+if (cluster.isMaster) {
 
-var server = http.createServer(app);
+    // Informe de estado
+    cluster.on('listening', (worker, address) => {
+        console.log('Worker', worker.id, ' connected to ', address.port, 'with pid', worker.process.pid);
+    });
 
-/**
- * Listen on provided port, on all network interfaces.
- */
+    // Arrancar nuevo worker si cae alguno
+    cluster.on('exit', (worker) => {
+        console.log('Worker', worker.id, 'with pid', worker.process.pid, 'has ended');
+        cluster.fork();
+    });
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+    // Recoger número de cores disponibles
+    const cores = require('os').cpus().length;
+
+    // Crear un worker por core
+    for (let i = 0; i < cores; i++) {
+        cluster.fork();
+    }
+} else {
+    /**
+     * Create HTTP server.
+     */
+
+    var server = http.createServer(app);
+
+    /**
+     * Listen on provided port, on all network interfaces.
+     */
+
+    server.listen(port);
+    server.on('error', onError);
+    server.on('listening', onListening);
+}
 
 /**
  * Normalize a port into a number, string, or false.
