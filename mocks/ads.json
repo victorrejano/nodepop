@@ -1,0 +1,32 @@
+{
+  "ads": [
+    {
+      "name": "Bicicleta",
+      "forSale": true,
+      "price": 230.15,
+      "image": "images/ads/bici.jpg",
+      "tags": ["lifestyle", "motor"]
+    },
+    {
+      "name": "iPhone 3GS",
+      "forSale": false,
+      "price": 50,
+      "image": "images/ads/iphone.png",
+      "tags": ["lifestyle", "mobile"]
+    },
+    {
+      "name": "Macbook Pro",
+      "forSale": true,
+      "price": 1399.95,
+      "image": "images/ads/mac.jpg",
+      "tags": ["lifestyle", "work"]
+    },
+    {
+      "name": "Raqueta de tenis",
+      "forSale": false,
+      "price": 85,
+      "image": "images/ads/raqueta.jpg",
+      "tags": ["lifestyle"]
+    }
+  ]
+}
