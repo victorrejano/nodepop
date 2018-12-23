@@ -19,9 +19,8 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', require('./routes/index'));
-app.use('/users', require('./routes/users'));
-app.use('/ads', require('./routes/api/v1/adsController'));
+// Rutas API
+app.use('/api/v1/ads', require('./routes/api/v1/adsController'));
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

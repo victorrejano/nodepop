@@ -18,6 +18,9 @@ const adSchema = mongoose.Schema({
     }
 });
 
+// Servir listado de tags
+adSchema.statics.allTags = () => {return allTags};
+
 // Crear el modelo
 const Ad = mongoose.model('Ad', adSchema);
 
