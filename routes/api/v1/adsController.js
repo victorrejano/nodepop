@@ -4,6 +4,10 @@ var express = require('express');
 var router = express.Router();
 
 const Ad = require('../../../models/Ad');
+const jwtAuth = require('../../../lib/jwtAuth');
+
+// Middleware de autenticación
+router.use(jwtAuth());
 
 /**
  * GET /api/v1/ads
@@ -65,16 +69,16 @@ router.get('/', async (req, res, next) => {
  * Listado de tags disponibles
  */
 router.get('/tags', (req, res, next) => {
-   try {
-       // Obtener listado de tags
+    try {
+        // Obtener listado de tags
         const list = Ad.allTags();
 
         // Enviar respuesta
         res.json({success: true, data: list});
-   } catch (err) {
-       // Reportar error
-       next(err);
-   }
+    } catch (err) {
+        // Reportar error
+        next(err);
+    }
 });
 
 module.exports = router;

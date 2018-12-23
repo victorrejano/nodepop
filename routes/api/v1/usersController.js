@@ -4,6 +4,7 @@ var express = require('express');
 var router = express.Router();
 
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 const User = require('../../../models/User');
 
 /**
@@ -19,7 +20,7 @@ router.post('/login', async (req, res, next) => {
         const password = req.body.password;
 
         // Buscar usuario
-        const user = await User.findOne({ email: email}).exec();
+        const user = await User.findOne({email: email}).exec();
 
         // Verificar usuario
         if (!user || !(bcrypt.compareSync(password, user.password))) {
@@ -30,9 +31,18 @@ router.post('/login', async (req, res, next) => {
             return;
         }
 
-        // Crear token
+        // Asignar token
+        jwt.sign({user_id: user._id}, process.env.JWT_KEY, {
+            expiresIn: process.env.JWT_EXPIRATION
+        }, (err, token) => {
+            if (err) {
+                next(err);
+                return;
+            }
+            res.json({success: true, data: token});
+        });
 
-        res.json({success : true});
+
     } catch (err) {
         next(err);
     }
@@ -41,7 +51,7 @@ router.post('/login', async (req, res, next) => {
 /**
  * POST /api/v1/users
  */
-router.post('/' , async (req, res, next) => {
+router.post('/', async (req, res, next) => {
     try {
         // Parámetros de API
         const email = req.body.email;
@@ -54,8 +64,7 @@ router.post('/' , async (req, res, next) => {
             const user = new User(req.body);
 
             // Hashear password
-            const salt = bcrypt.genSaltSync(10);
-
+            const salt = bcrypt.genSaltSync(process.env.HASH_SALT);
             const hash = bcrypt.hashSync(user.password, salt);
             user.password = hash;
 
@@ -63,10 +72,10 @@ router.post('/' , async (req, res, next) => {
             await user.save();
 
             // Devolver usuario guardado
-            res.json({success : true, data : user});
+            res.json({success: true, data: user});
 
         } else {
-            res.json({success : false, error : 'Email, name and password are required'});
+            res.json({success: false, error: 'Email, name and password are required'});
         }
 
     } catch (err) {
