@@ -1,0 +1,6 @@
+{
+  "wrong-credentials": "Credenciales erróneas",
+  "required-user-data": "Email, nombre y contraseña son obligatorios",
+  "no-token-provided": "No ha proporcionado un token",
+  "invalid-token": "Token no válido"
+}

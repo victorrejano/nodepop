@@ -1,13 +1,21 @@
 var createError = require('http-errors');
-var express = require('express');
+var express = require('express'), i18n = require("i18n");
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+var app = express();
+
 // Importar conexión
 require('./lib/connection');
 
-var app = express();
+// Configurar internacionalización
+i18n.configure({
+   locales: ['en', 'es'],
+   directory: './locales'
+});
+
+app.use(i18n.init);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

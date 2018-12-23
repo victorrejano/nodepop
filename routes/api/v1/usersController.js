@@ -24,7 +24,7 @@ router.post('/login', async (req, res, next) => {
 
         // Verificar usuario
         if (!user || !(bcrypt.compareSync(password, user.password))) {
-            const err = new Error('Wrong credentials');
+            const err = new Error(res.__('wrong-credentials'));
             err.status = 403;
 
             next(err);
@@ -76,7 +76,7 @@ router.post('/', async (req, res, next) => {
 
         }
 
-        res.json({success: false, error: 'Email, name and password are required'});
+        res.json({success: false, error: res.__('required-user-data')});
 
     } catch (err) {
         next(err);
