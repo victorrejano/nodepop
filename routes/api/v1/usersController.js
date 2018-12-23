@@ -9,7 +9,7 @@ const User = require('../../../models/User');
 
 /**
  * POST /api/v1/users/login
- * Login
+ * Login de usuario
  */
 router.post('/login', async (req, res, next) => {
 
@@ -40,6 +40,7 @@ router.post('/login', async (req, res, next) => {
                 return;
             }
             res.json({success: true, data: token});
+            return;
         });
 
 
@@ -50,6 +51,7 @@ router.post('/login', async (req, res, next) => {
 
 /**
  * POST /api/v1/users
+ * Crea un usuario
  */
 router.post('/', async (req, res, next) => {
     try {
@@ -63,8 +65,9 @@ router.post('/', async (req, res, next) => {
             // Crear usuario
             const user = new User(req.body);
 
+            console.log(process.env.HASH_SALT);
             // Hashear password
-            const salt = bcrypt.genSaltSync(process.env.HASH_SALT);
+            const salt = bcrypt.genSaltSync(10);
             const hash = bcrypt.hashSync(user.password, salt);
             user.password = hash;
 
@@ -73,7 +76,7 @@ router.post('/', async (req, res, next) => {
 
             // Devolver usuario guardado
             res.json({success: true, data: user});
-
+            return;
         }
 
         res.json({success: false, error: res.__('required-user-data')});

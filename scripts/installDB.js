@@ -52,7 +52,7 @@ fs.readFile(filePath, {encoding: 'utf8'}, async (err, data) => {
             const user = new User(element);
 
             // Hashear password
-            const salt = bcrypt.genSaltSync(process.env.HASH_SALT);
+            const salt = bcrypt.genSaltSync(10);
             const hash = bcrypt.hashSync(user.password, salt);
             user.password = hash;
 
