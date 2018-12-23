@@ -5,7 +5,7 @@ const mongoose = require('mongoose');
 // Crear el schema
 const userSchema = mongoose.Schema({
     name: {type: String, index: true},
-    email: {type: String, index: true},
+    email: {type: String, unique: true, index: true},
     password: String
 });
 
