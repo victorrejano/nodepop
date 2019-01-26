@@ -27,6 +27,12 @@ app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//Root
+app.get('/', function (req, res)
+{
+    res.render('index');
+});
+
 // Rutas API
 app.use('/api/v1/ads', require('./routes/api/v1/adsController'));
 app.use('/api/v1/users', require('./routes/api/v1/usersController'));
