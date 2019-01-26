@@ -56,7 +56,11 @@ router.get('/', async (req, res, next) => {
         // Ejecutar la query y obtener el resultado
         const list = await query.exec();
 
+        const host = req.get('host');
         // Enviar respusta
+        list.map(item => {
+           item.image = host + `/${item.image}`;
+        });
         res.json({success: true, data: list});
     } catch (err) {
         // Reportar error
