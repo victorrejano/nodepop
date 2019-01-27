@@ -34,7 +34,7 @@ Nodepop API - Venta de artículos de segunda mano.
 
 ### Listado de anuncios ```GET /api/v1/ads```
 
-- Ejemplo: http://nodepop.com/api/v1/ads
+- Ejemplo: https://nodepop.vrmapps.com/api/v1/ads
 
 | Parámetros de filtrado (*Obligatorio)| Tipo           | Uso            |
 | ---------------------------| -------------- | -------------- |
@@ -103,7 +103,7 @@ Nodepop API - Venta de artículos de segunda mano.
 
 ### Listado de tags ```GET /api/v1/ads/tags```
 
-- Ejemplo: http://nodepop.com/api/v1/ads/tags
+- Ejemplo: https://nodepop.vrmapps.com/api/v1/ads/tags
 
 | Parámetro (*Obligatorio)   | Tipo           | Uso            |
 | ---------------------------| -------------- | -------------- |
@@ -125,7 +125,7 @@ Nodepop API - Venta de artículos de segunda mano.
 
 ### Registro de usuario ```POST /api/v1/users```
 
-- Ejemplo: http://nodepop.com/api/v1/users
+- Ejemplo: https://nodepop.vrmapps.com/api/v1/users
 
 | Parámetro (*Obligatorio)   | Tipo           | Uso            |
 | ---------------------------| -------------- | -------------- |
@@ -151,7 +151,7 @@ Nodepop API - Venta de artículos de segunda mano.
 
 ### Login de usuario ```POST /api/v1/users/login```
 
-- Ejemplo: http://nodepop.com/api/v1/users/login
+- Ejemplo: https://nodepop.vrmapps.com/api/v1/users/login
 
 | Parámetro (*Obligatorio)   | Tipo           | Uso            |
 | ---------------------------| -------------- | -------------- |
@@ -167,3 +167,18 @@ Nodepop API - Venta de artículos de segunda mano.
   "data": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNWMxZjViM2E1N2Q0MTk4MzQ3OTAyOGEzIiwiaWF0IjoxNTQ1NTYxMTY3LCJleHAiOjE1NDU2NDc1Njd9.mdV5s5fhkWHR7sULip5jhJ0vbFnDPkLLHL9STJtYm-4"
 }
 ```
+## Indicaciones sobre despliegue
+
+- Dominio para servicio API
+  ```
+  https://nodepop.vrmapps.com/
+  ```
+- IP pública 
+  ```
+  63.34.79.211
+  ```
+- Ficheros estáticos 
+  ```
+  https://nodepop.vrmapps.com/images/ads/mac.jpg
+  https://nodepop.vrmapps.com/images/ads/bici.jpg
+  ```
